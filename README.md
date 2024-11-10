@@ -17,6 +17,14 @@ the source of dataset for this project is kaggle:
 dataset link: https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download
 
 ## schema
+### 15 business problem
+''' sql
+q1.count the no of movies vs tv shows
+select count(*) as "total content of movies vs tv shows" from netflix
+group by typess
+'''
+
+
 
 
 
