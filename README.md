@@ -6,7 +6,7 @@
 this project involves a comprehensive analysis ofnnetflix movies and tv show using sql postgre.The goal is to extract values from insight and answer different business question
 based on the dataset. the following redme provide a detail acount of the project objective
 
-# objective
+## objective
 analyze the distribution of content types( movie vs TV show)
 identify the most common rating for tv show
 list and analyze content based on release year,country and duration
@@ -16,16 +16,17 @@ explore and categories content based on specific criteria and keywords
 the source of dataset for this project is kaggle:
 dataset link: https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download
 
-# schema
+## schema
 
 
--- 15 business problem
--- q1.count the no of movies vs tv shows
+## 15 business problem
+''' sql
+q1.count the no of movies vs tv shows
 select count(*) as "total content of movies vs tv shows" from netflix
 group by typess
+'''
 
-
-
+''' sql
 -- q2. find the most common rating for movies and tv shows.
 select typess,rating from netflix
 ;
@@ -36,21 +37,27 @@ RANK() over(partition by typess order by count(*)) as ranking from netflix
 group by 1,2
  ) as t1
  where ranking=1;
- 
+'''
+
+'''
 -- q3. list all the movies released in specific year.alter
 select * from netflix
 where typess='Movie' and release_year=2020
+'''
 
+'''
 -- q4. find the top country with most content on netflix.
 
 select distinct unnest(string_to_array(country,','))as new_country ,count(show_id) as total_content
 from netflix group by 1 order by 2 desc limit 5
+''''
 
-
+'''
 -- Q5.identify the longest movie?
 select * from  netflix where typess='Movie' and 
 duration=(select max(duration) from netflix)
 
+'''
 -- q6.find content added in the last five year
 
 select * from netflix where TO_DATE(date_added,'month,dd,yyyy')>= current_date- interval '5 years'
